@@ -265,7 +265,7 @@ class Main2 {
         Comparator<Person>[] personComparators = new Comparator[]{new FirstNameComparator(), new LastNameComparator(), new AgeComparator()};
 
         Integer[] numbers =  FileInputV1.readIntegers("randomIntegers_1M.txt");
-        Person[] people =  FileInputV2.readIntegers("people-1M.txt");
+        Person[] people =  FileInputV2.readIntegers("people.txt");
 
 
         Stopwatch timer = new Stopwatch();
