@@ -4,13 +4,15 @@ import java.util.PriorityQueue;
  * Starting point for a Hufman compression-decompression tool
  * in demo-mode (codes are Strings, not bits as they should be in real life)
  */
+
 class HufmanEncoderPrototype {
     // alphabet size of extended ASCII
     private static int R = 256;
 
     /**
-     * Nodes of Hufman tree
-     */
+      Nodes of Hufman tree*
+     **/
+
     private static class HufmanNode implements Comparable<HufmanNode> {
         char ch;
         int freq;
@@ -27,6 +29,7 @@ class HufmanEncoderPrototype {
          *
          * @return true if the node is a leaf node
          */
+
         boolean isLeaf() {
             return (left == null) && (right == null);
         }
@@ -40,6 +43,7 @@ class HufmanEncoderPrototype {
          * @return a negative integer, zero, or a positive integer
          * as this object is less than, equal to, or greater than the specified object.
          */
+
         public int compareTo(HufmanNode that) {
             return this.freq - that.freq;
         }
@@ -52,8 +56,10 @@ class HufmanEncoderPrototype {
      * The encode operation returns as result a CompressionResult.
      * The decode operation takes as input argument a CompressionResult.
      */
+
     private static class CompressionResult {
-        HufmanNode huffmanCodes;
+        HufmanNode
+                huffmanCodes;
         String Bits;
 
         public CompressionResult(String bits, HufmanNode tree) {
@@ -70,6 +76,7 @@ class HufmanEncoderPrototype {
      * @param s - the string to be encoded
      * @return a CompressionResult
      */
+
     public static CompressionResult encode(String s) {
 
         char[] input = s.toCharArray();
@@ -94,6 +101,7 @@ class HufmanEncoderPrototype {
         // use Huffman code to encode input
         CompressionResult result = new CompressionResult("", root);
         // TO DO: Implement compression of input and compute the bits of the CompressionResult!
+
         String encoded = "";
         for (int i = 0; i < input.length; i++) {
             encoded = encoded + st[input[i]];
@@ -102,12 +110,12 @@ class HufmanEncoderPrototype {
 
     }
 
-
     /**
      * Build the Hufman tree from given frequencies
      * @param freq - the array of character frequencies
      * @return the root node of the Hufman tree
      */
+
     private static HufmanNode buildHufmanTree(int[] freq) {
         // initialize priority queue with singleton trees
         PriorityQueue<HufmanNode> pq = new PriorityQueue<>();
@@ -124,13 +132,13 @@ class HufmanEncoderPrototype {
         return pq.remove();
     }
 
-
     /**
      * Build (and print) lookup table for symbols and their Hufman codes
      * @param st - the lookup  table. st[c] contains the code for character c as a string
      * @param x - the root node of the Hufman tree
      * @param s - a buffer collecting the  path encoding  from the root to the current node
      */
+
     private static void printCodeTable(String[] st, HufmanNode x, String s) {
         if (!x.isLeaf()) {
             printCodeTable(st, x.left, s + '0');
@@ -142,13 +150,13 @@ class HufmanEncoderPrototype {
         }
     }
 
-
     /**
      * Decodes an encoded message
      *
      * @param encoded - contains an encoded string and the Huffman tree that was used for encoding
      * @return - the decoded string
      */
+
     public static String decode(CompressionResult encoded) {
         String output = "";
         HufmanNode node = encoded.huffmanCodes;
@@ -172,7 +180,6 @@ class HufmanEncoderPrototype {
     public static void main(String[] args) {
         String original = "ABRACABABRA";
         System.out.println("Original message to be encoded: " + original);
-
         CompressionResult result = encode(original);
 
         System.out.println("Encoded message has " + result.Bits.length() + " bits");

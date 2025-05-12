@@ -1,0 +1,14 @@
+7
+Ann
+Bob
+Chris
+George
+John
+Mary
+Peter
+Ann John
+Bob Peter
+Chris Peter
+Chris Mary
+George John
+George Mary
